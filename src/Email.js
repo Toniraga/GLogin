@@ -2,7 +2,11 @@ import React from 'react';
 import googleLogo from './Google_2015_logo.svg.png';
 import './styles.css';
 
-const Email = ({ setScreen }) => {
+const Email = ({ setScreen, inputData, setInputData }) => {
+	const setEmail = (val) => {
+		setInputData({...inputData, email: val})
+	}
+
 	return (
 		<div className="email_container">
 			<div>
@@ -11,10 +15,18 @@ const Email = ({ setScreen }) => {
 			<p className="email_signin">Sign in</p>
 			<p className="email_continue">to continue to Gmail</p>
 			<div className="email_input_cover">
-				<input className="input" />
+				<div className="text-field">
+					<input
+						onChange={(e) => setEmail(e.target.value)}
+						className="input"
+						type="text"
+						required
+					/>
+					<label>Email or phone</label>
+				</div>
 				<a
 					style={{
-						color: '#1a73e8',
+						color: '#1a40e8dc',
 						opacity: '0.8',
 						cursor: 'pointer',
 						fontWeight: 600,
@@ -34,7 +46,7 @@ const Email = ({ setScreen }) => {
 				</p>
 				<a
 					style={{
-						color: '#1a73e8',
+						color: '#1a40e8dc',
 						opacity: '0.8',
 						cursor: 'pointer',
 						fontWeight: 600,
@@ -51,7 +63,7 @@ const Email = ({ setScreen }) => {
 			<div className="email_next_container">
 				<a
 					style={{
-						color: '#1a73e8',
+						color: '#1a40e8dc',
 						opacity: '0.8',
 						cursor: 'pointer',
 						fontWeight: 600,
@@ -64,7 +76,7 @@ const Email = ({ setScreen }) => {
 				>
 					Create account
 				</a>
-				<button onClick={() => setScreen('password')} className="button">
+				<button disabled={!inputData.email.trim()} onClick={() => setScreen('password')} className="button">
 					Next
 				</button>
 			</div>
